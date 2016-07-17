@@ -85,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
             // Return a PlaceholderFragment (defined as a static inner class below).
             Log.d("MAIN ACTIVITY", position + " ");
             return baseFragment.newInstance(position + 1);
+            // TODO: 7/17/16 based on position (0,1), return alternate fragments: 0 --> baseFragment. 1 --> scrollFragment 
         }
 
         @Override
