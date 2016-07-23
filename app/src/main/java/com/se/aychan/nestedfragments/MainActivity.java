@@ -1,5 +1,6 @@
 package com.se.aychan.nestedfragments;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -11,7 +12,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity {
+import com.se.aychan.nestedfragments.Fragments.baseFragment;
+import com.se.aychan.nestedfragments.Fragments.listFragment;
+
+public class MainActivity extends AppCompatActivity implements listFragment.OnFragmentInteractionListener{
 //new email should be linked to this commit, for aychan user
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -69,6 +73,11 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
+
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
@@ -84,8 +93,13 @@ public class MainActivity extends AppCompatActivity {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
             Log.d("MAIN ACTIVITY", position + " ");
-            return baseFragment.newInstance(position + 1);
-            // TODO: 7/17/16 based on position (0,1), return alternate fragments: 0 --> baseFragment. 1 --> scrollFragment 
+            switch (position){
+                case 0:
+                    return baseFragment.newInstance(position);
+                case 1:
+                    return listFragment.newInstance(position);
+            }
+            return null;
         }
 
         @Override
