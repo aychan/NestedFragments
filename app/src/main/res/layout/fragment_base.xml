@@ -4,10 +4,36 @@
     android:layout_height="match_parent"
     tools:context="com.se.aychan.nestedfragments.baseFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding = "10dp">
+
+            <!--<TextView-->
+                <!--style="@style/TextViewCentered"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="@string/placeholder_time"-->
+                <!--/>-->
+            <FrameLayout
+                android:id="@+id/frame_layout_baseFragment"
+                android:background="@color/colorEmptyFragment"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"/>
+            <FrameLayout
+                android:id="@+id/frame_layout_baseFragment_2"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:background="@color/colorEmptyFragment"/>
+
+        </LinearLayout>
+    </ScrollView>
 
 </FrameLayout>

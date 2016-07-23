@@ -4,20 +4,20 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link baseFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link baseFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * @author aychan
+ * this class contains some utility methods, or rather basic methods which show interaction between Fragments and Activities, and nested Fragments.
+ *
  */
 public class baseFragment extends Fragment {
+    private final String TAG = getClass().getSimpleName();
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "Section Number";
@@ -58,23 +58,27 @@ public class baseFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_base, container, false);
-//        Fragment NestedFragment = new NestedFragment();
-//        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-//        transaction.add(R.id.section_nestedFragment, NestedFragment).commit();
-//
-//        FrameLayout frameLayout = (FrameLayout) rootView.findViewById(R.id.section_nestedFragment);
-//        frameLayout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(getContext(),"hello",Toast.LENGTH_SHORT).show();
-//            }
-//        });
+        addChildFragment(R.id.frame_layout_baseFragment, new timeFragment());
+        addChildFragment(R.id.frame_layout_baseFragment_2, new timeFragment());
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
+    /**
+     * addChildFragment method takes in a
+     * @param ContainerViewID layout id for where fragment is added
+     * @param fragment specified fragment
+     * @return TRUE if successful transaction
+     */
+    private boolean addChildFragment(int ContainerViewID, Fragment fragment){
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.add(ContainerViewID, fragment).commit();
+        Log.d(TAG, " Child Fragment: <" + fragment.getClass().getSimpleName() + "> Transaction Complete. ");
+        return true;
+    }
+
+
+
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
